@@ -36,12 +36,10 @@ const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>(MOCK_USERS);
   const [activeTab, setActiveTab] = useState<'analytics' | 'safety' | 'items' | 'transactions' | 'approvals'>('analytics');
 
-  // Logic: Filter pending users (unverified students)
   const pendingUsers = useMemo(() => 
     users.filter(u => !u.verified && u.role !== 'admin'), 
   [users]);
 
-  // Logic: Safety Watch (report_count > 3)
   const highRiskUsers = useMemo(() => 
     MOCK_TRUST_SAFETY
       .filter(ts => ts.report_count > 3)
@@ -51,7 +49,6 @@ const AdminDashboard: React.FC = () => {
       }))
   , [users]);
 
-  // Logic: Monthly Rental Volume Chart Data
   const chartData = useMemo(() => {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const volume: Record<string, number> = {};
@@ -65,7 +62,6 @@ const AdminDashboard: React.FC = () => {
     return months.map(month => ({ name: month, rentals: volume[month] }));
   }, []);
 
-  // Actions
   const approveUser = (userId: string) => {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, verified: true } : u));
     alert("Student verified successfully!");
@@ -99,7 +95,7 @@ const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* 1. ANALYTICS TAB */}
+      {}
       {activeTab === 'analytics' && (
         <div className="space-y-6 animate-in fade-in duration-500">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -124,7 +120,7 @@ const AdminDashboard: React.FC = () => {
         </div>
       )}
 
-      {/* 2. USER APPROVALS TAB */}
+      {}
       {activeTab === 'approvals' && (
         <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden animate-in slide-in-from-bottom-4">
           <div className="px-8 py-6 border-b flex justify-between items-center bg-orange-50/30">
